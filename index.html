@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abirami · Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#14302b;--paper:#eef0ea;--stamp:#d2362b;--tag:#f2c230;--soft:#9fb3ac;
+--d:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;--m:'Space Mono','Courier New',monospace;--e:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:12px}
+body{background:var(--ink);color:var(--paper);font:400 16px/1.65 var(--m);overflow-x:hidden;-webkit-text-size-adjust:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--tag);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--d);font-weight:900;line-height:.88;letter-spacing:.01em;text-transform:uppercase}
+section{padding:84px 0}
+.sec-h{font-size:clamp(3.4rem,13vw,7rem);margin-bottom:34px}
+.sec-h small{display:block;font:700 .8rem/1 var(--m);letter-spacing:0;color:var(--tag);text-transform:none;margin-bottom:12px}
+
+/* opening */
+#open{position:fixed;inset:0;z-index:50;background:var(--ink);display:grid;place-items:center;transition:opacity .5s var(--e),visibility .5s}
+#open.gone{opacity:0;visibility:hidden}
+.pg{position:relative;width:min(86vw,420px);aspect-ratio:3/4;background:var(--paper);color:var(--ink);padding:18px;display:grid;place-items:center;
+background-image:repeating-linear-gradient(0deg,transparent 0 27px,rgba(20,48,43,.1) 27px 28px)}
+.pg b{position:absolute;top:14px;left:18px;font:700 .7rem var(--m)}
+.big{font-family:var(--d);font-weight:900;font-size:clamp(3.4rem,20vw,6.4rem);color:var(--stamp);border:6px solid var(--stamp);padding:2px 14px 0;line-height:1;text-transform:uppercase;transform:rotate(-8deg);opacity:0}
+.go .big{animation:thump .55s .5s var(--e) forwards}
+.go .pg{animation:jolt .25s 1s}
+@keyframes thump{0%{opacity:0;transform:rotate(-8deg) scale(2.6)}60%{opacity:1;transform:rotate(-8deg) scale(.94)}100%{opacity:.92;transform:rotate(-8deg) scale(1)}}
+@keyframes jolt{25%{transform:translate(2px,3px)}60%{transform:translate(-2px,-1px)}}
+#skip{position:absolute;right:16px;bottom:16px;font:700 .8rem var(--m);background:none;color:var(--paper);border:2px solid var(--paper);padding:10px 16px;cursor:pointer}
+
+/* landing */
+.hero{min-height:100svh;padding:26px 0 60px;display:flex;flex-direction:column;justify-content:space-between}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;font-size:.8rem}
+.mono-wrap{width:96px;cursor:pointer;background:none;border:0;color:var(--tag);padding:0}
+.mono-wrap svg{width:100%;display:block;transition:transform .6s var(--e)}
+.mono-wrap:hover svg{transform:rotate(-14deg)}
+.hero h1{font-size:clamp(5.2rem,27vw,17rem);margin:40px 0 0 -.04em;color:var(--paper)}
+.hero h1 span{display:block;font:700 clamp(.9rem,3.2vw,1.1rem)/1.5 var(--m);text-transform:none;margin:0 0 14px .3em;color:var(--soft)}
+.tag{font-size:clamp(1.15rem,3.6vw,1.6rem);max-width:30ch;margin:28px 0 14px;line-height:1.4}
+.now{display:inline-block;border-left:6px solid var(--tag);padding-left:12px;font-size:.88rem;margin-bottom:30px}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{font:700 1rem var(--m);text-decoration:none;padding:14px 26px;border:3px solid var(--paper);transition:transform .25s var(--e),background .25s,color .25s;display:inline-block}
+.btn.p{background:var(--tag);border-color:var(--tag);color:var(--ink)}
+.btn:hover{transform:translateY(-4px) rotate(-1.5deg)}
+.btn:not(.p):hover{background:var(--paper);color:var(--ink)}
+
+/* ticket base */
+.tk{background:var(--paper);color:var(--ink);position:relative;display:grid}
+.tk .stub{border-top:3px dashed var(--ink);padding:16px 20px;font-size:.78rem}
+.tk::before,.tk::after{content:"";position:absolute;width:26px;height:26px;border-radius:50%;background:var(--ink);top:var(--cut,70%);margin-top:-13px}
+.tk::before{left:-13px}.tk::after{right:-13px}
+.tk .main{padding:26px 22px}
+.tk h3{font-size:2.6rem;margin-bottom:12px}
+.tk p+p{margin-top:14px}
+.lbl{font-size:.74rem;color:#5b7069;margin-bottom:8px}
+
+/* about */
+.about{--cut:auto}
+.about .main p{max-width:56ch}
+.about .stub{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 20px}
+.about::before,.about::after{top:calc(100% - 62px)}
+
+/* skills board */
+.board{border:3px solid var(--paper)}
+.row{display:grid;grid-template-columns:44px 1fr auto;gap:10px 14px;align-items:center;padding:16px 14px;border-bottom:2px solid rgba(238,240,234,.25)}
+.row:last-child{border:0}
+.gate{font:900 1.9rem var(--d);background:var(--tag);color:var(--ink);text-align:center;line-height:1.5}
+.row h3{font-size:1.8rem;line-height:1}
+.row p{grid-column:2/4;font-size:.84rem;color:var(--soft);line-height:1.5}
+.st{font-weight:700;font-size:.82rem;padding:4px 10px;border:2px solid currentColor}
+.st.c{color:var(--tag)}.st.l{color:var(--paper)}.st.b{color:var(--stamp);background:var(--paper)}
+
+/* journey */
+.trip{display:grid;gap:36px}
+.trip .tk{--cut:68%}
+.trip .stamp{position:absolute;right:14px;top:14px;font:900 1.5rem var(--d);text-transform:uppercase;border:4px solid var(--stamp);color:var(--stamp);padding:0 10px;transform:rotate(9deg);opacity:.9}
+.trip .t2{border-left:14px solid var(--tag)}
+.trip .t3{background:transparent;color:var(--paper);border:3px dashed var(--soft)}
+.trip .t3 .stub{border-color:var(--soft)}.trip .t3 .lbl{color:var(--soft)}
+.trip .t3::before,.trip .t3::after{display:none}
+.route{display:flex;align-items:center;gap:10px;font:700 .85rem var(--m);margin:6px 0 14px}
+.route i{flex:1;border-top:3px dotted currentColor}
+
+/* flip cards */
+.flips{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px}
+.fc{perspective:900px;aspect-ratio:3/4;background:none;border:0;padding:0;cursor:pointer;color:inherit;font:inherit;text-align:left}
+.fi{position:relative;width:100%;height:100%;transition:transform .7s var(--e);transform-style:preserve-3d}
+.fc.on .fi{transform:rotateY(180deg)}
+.fc:hover .fi{transform:rotateY(-12deg)}
+.fc.on:hover .fi{transform:rotateY(168deg)}
+.fa,.fb{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:14px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.fa{background:var(--tag);color:var(--ink)}
+.fa strong{font:900 clamp(2.6rem,12vw,4.6rem)/.85 var(--d);text-transform:uppercase}
+.fa span,.fb span{font-size:.72rem;font-weight:700}
+.fb{background:var(--paper);color:var(--ink);transform:rotateY(180deg);font-size:.82rem;line-height:1.45;border:4px solid var(--stamp)}
+.hob{margin-top:40px;display:flex;flex-wrap:wrap;gap:10px}
+.hob span{border:2px solid var(--soft);padding:6px 14px;font-size:.88rem}
+
+/* contact */
+.bag{background:var(--tag);color:var(--ink);padding:34px 24px 30px 56px;position:relative;clip-path:polygon(0 0,calc(100% - 28px) 0,100% 28px,100% 100%,0 100%);max-width:560px}
+.bag::before{content:"";position:absolute;left:18px;top:34px;width:22px;height:22px;border-radius:50%;background:var(--ink)}
+.bag h3{font-size:3rem;margin-bottom:18px}
+.bag a{display:block;font-weight:700;padding:12px 0;border-top:2px solid var(--ink);overflow-wrap:anywhere;text-decoration:none;transition:padding .3s var(--e)}
+.bag a:hover{padding-left:12px}
+.bag a small{display:block;font-weight:400;font-size:.74rem}
+footer{padding:40px 0 70px;font-size:.78rem;color:var(--soft)}
+#plane{position:fixed;left:-140px;top:30%;width:120px;z-index:40;color:var(--tag);pointer-events:none}
+#plane.fly{animation:fly 3.4s var(--e) forwards}
+@keyframes fly{to{transform:translateX(calc(100vw + 300px)) translateY(-120px) rotate(-6deg)}}
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,160%);background:var(--paper);color:var(--ink);padding:12px 18px;font-weight:700;font-size:.85rem;z-index:41;transition:transform .5s var(--e);max-width:90vw;border:3px solid var(--stamp)}
+#toast.on{transform:translate(-50%,0)}
+
+@media(min-width:760px){
+.wrap{padding:0 40px}
+.tk.about{grid-template-columns:1fr 200px}
+.about .stub{border-top:0;border-left:3px dashed var(--ink);flex-direction:column;justify-content:flex-start}
+.about::before,.about::after{left:auto;right:auto;top:-13px;margin:0}
+.about::before{left:calc(100% - 213px)}.about::after{right:auto;left:calc(100% - 213px);top:auto;bottom:-13px}
+.trip{grid-template-columns:1.2fr 1fr;align-items:start}
+.trip .t2{margin-top:70px}.trip .t3{grid-column:1/3;max-width:640px;margin-left:12%}
+.flips{grid-template-columns:repeat(4,1fr)}
+.row{grid-template-columns:60px 1.2fr 2fr auto}.row p{grid-column:auto}
+}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+.big{opacity:.92}
+}
+</style>
+</head>
+<body>
+
+<div id="open" role="dialog" aria-label="Opening animation">
+  <div class="pg"><b>PASSPORT / PAGE 01</b><div class="big">Abirami</div></div>
+  <button id="skip">Skip</button>
+</div>
+
+<main id="top">
+<header class="hero wrap">
+  <div class="top">
+    <button class="mono-wrap" id="mono" aria-label="Abirami monogram">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <defs><path id="c" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
+        <circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-width="3"/>
+        <circle cx="50" cy="50" r="27" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <text font-family="Space Mono,monospace" font-size="9.5" font-weight="700" fill="currentColor" letter-spacing="1.6"><textPath href="#c">ABIRAMI · B.TECH IT · YEAR 1 ·</textPath></text>
+        <text x="50" y="62" text-anchor="middle" font-family="Big Shoulders Display,Impact,sans-serif" font-weight="900" font-size="38" fill="currentColor">A</text>
+      </svg>
+    </button>
+    <div style="text-align:right">PASSENGER: ABIRAMI<br>FLIGHT: B.TECH IT / YEAR 1</div>
+  </div>
+  <div>
+    <h1><span>Hi, I'm</span>Abirami</h1>
+    <p class="tag">I'm learning to build software that works, then make it look like someone cared.</p>
+    <p class="now">Currently: first year, figuring out which gate to run to next.</p>
+    <div class="btns"><a class="btn p" href="#about">Explore</a><a class="btn" href="#contact">Say hi</a></div>
+  </div>
+</header>
+
+<section id="about"><div class="wrap">
+  <h2 class="sec-h"><small>Boarding pass</small>About me</h2>
+  <div class="tk about">
+    <div class="main">
+      <p>I started B.Tech IT not sure what kind of builder I wanted to be, and that is still the fun part. Every new language feels like a new city: confusing at first, then suddenly I know my way around.</p>
+      <p>What pulls me in is the moment something I typed becomes something I can click. I like that the screen is honest. If it works, it works. If it breaks, it tells me where to look.</p>
+      <p>Right now I'm collecting small wins, asking a lot of questions, and trying to leave each project a little tidier than the last.</p>
+    </div>
+    <div class="stub"><span>FROM: Curiosity</span><span>TO: Software that helps</span><span>SEAT: 1A, window</span></div>
+  </div>
+</div></section>
+
+<section id="skills"><div class="wrap">
+  <h2 class="sec-h"><small>Departures</small>Skills</h2>
+  <div class="board">
+    <div class="row"><div class="gate">A</div><h3>HTML + CSS</h3><p>I can build a page and make it fit a phone.</p><span class="st c">Comfortable</span></div>
+    <div class="row"><div class="gate">B</div><h3>Python</h3><p>Small scripts and class exercises. Growing fast.</p><span class="st c">Comfortable</span></div>
+    <div class="row"><div class="gate">C</div><h3>JavaScript</h3><p>I make things move, and I'm still learning why they sometimes don't.</p><span class="st l">Learning</span></div>
+    <div class="row"><div class="gate">D</div><h3>Git + GitHub</h3><p>Commits and repos, with the odd merge scare.</p><span class="st l">Learning</span></div>
+    <div class="row"><div class="gate">E</div><h3>Databases</h3><p>Up next on my timetable.</p><span class="st b">Boarding soon</span></div>
+  </div>
+</div></section>
+
+<section id="journey"><div class="wrap">
+  <h2 class="sec-h"><small>Trip log</small>Journey</h2>
+  <div class="trip">
+    <article class="tk t1"><div class="stamp">Departed</div>
+      <div class="main"><p class="lbl">What I've made</p><h3>This site</h3>
+        <div class="route"><span>IDEA</span><i></i><span>LIVE</span></div>
+        <p>My first full page with no template: one file, hand-built, every pixel chosen on purpose. Add your own projects here.</p></div>
+      <div class="stub">Gate A · Status: shipped</div></article>
+    <article class="tk t2"><div class="main"><p class="lbl">What I'm learning</p><h3>JavaScript, properly</h3>
+        <div class="route"><span>BASICS</span><i></i><span>APPS</span></div>
+        <p>Arrays, events, and why asynchronous code feels like waiting for a delayed flight.</p></div>
+      <div class="stub">Gate C · Status: boarding</div></article>
+    <article class="tk t3"><div class="main"><p class="lbl">What I want to build</p><h3>A tool my classmates actually use</h3>
+        <p>Something small and useful on campus: a timetable helper, a study planner. If one friend opens it twice, it counts.</p></div>
+      <div class="stub">Gate ? · Status: planned</div></article>
+  </div>
+</div></section>
+
+<section id="beyond"><div class="wrap">
+  <h2 class="sec-h"><small>Duty free</small>Beyond code</h2>
+  <p style="max-width:48ch">Tap a card to turn it over. Swap these for your real fun facts.</p>
+  <div class="flips">
+    <button class="fc"><div class="fi"><div class="fa"><span>Fact</span><strong>Tea</strong><span>Tap to flip</span></div><div class="fb"><span>FACT</span>I can't start a long debugging session without a hot cup next to me.</div></div></button>
+    <button class="fc"><div class="fi"><div class="fa"><span>Fact</span><strong>Doodles</strong><span>Tap to flip</span></div><div class="fb"><span>FACT</span>My notebook margins are full of tiny drawings. Some became layout ideas.</div></div></button>
+    <button class="fc"><div class="fi"><div class="fa"><span>Fact</span><strong>Maps</strong><span>Tap to flip</span></div><div class="fb"><span>FACT</span>I like planning trips more than taking them. Yes, that is why this site is an airport.</div></div></button>
+    <button class="fc"><div class="fi"><div class="fa"><span>Fact</span><strong>Bugs</strong><span>Tap to flip</span></div><div class="fb"><span>FACT</span>My first big bug was one missing semicolon. It took me forty minutes.</div></div></button>
+  </div>
+  <div class="hob"><span>Sketching</span><span>Music on long commutes</span><span>Trying new recipes</span><span>Reading</span></div>
+</div></section>
+
+<section id="contact"><div class="wrap">
+  <h2 class="sec-h"><small>Baggage claim</small>Say hi</h2>
+  <div class="bag"><h3>Abirami</h3>
+    <a href="mailto:your.email@example.com"><small>Email</small>your.email@example.com</a>
+    <a href="https://www.linkedin.com/in/your-name" target="_blank" rel="noopener"><small>LinkedIn</small>linkedin.com/in/your-name</a>
+    <a href="https://github.com/your-username" target="_blank" rel="noopener"><small>GitHub</small>github.com/your-username</a>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">Made by hand by Abirami. Safe travels. <a href="#top">Back to departures</a></div></footer>
+
+<svg id="plane" viewBox="0 0 120 50" aria-hidden="true"><path fill="currentColor" d="M0 22 L60 20 L88 2 L98 2 L84 21 L112 22 Q120 25 112 28 L84 29 L98 48 L88 48 L60 30 L0 28 Z"/></svg>
+<div id="toast" role="status"></div>
+
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)},open=$('#open'),rm=matchMedia('(prefers-color-scheme: x)'),
+reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,seen=false;
+try{seen=sessionStorage.getItem('ab-open')}catch(e){}
+function close(){open.classList.add('gone');try{sessionStorage.setItem('ab-open','1')}catch(e){}}
+if(seen){open.classList.add('gone')}
+else{requestAnimationFrame(function(){open.classList.add('go')});setTimeout(close,reduce?600:2000)}
+$('#skip').onclick=close;
+document.querySelectorAll('.fc').forEach(function(c){c.onclick=function(){c.classList.toggle('on')}});
+var t=$('#toast'),n=0,tm;
+function toast(m){t.textContent=m;t.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){t.classList.remove('on')},3200)}
+$('#mono').onclick=function(){
+  n++;
+  if(n>=5){n=0;var p=$('#plane');p.classList.remove('fly');void p.getBoundingClientRect();p.classList.add('fly');
+    toast('Upgraded to business class. Enjoy the legroom.')}
+};
+})();
+</script>
+</body>
+</html>
